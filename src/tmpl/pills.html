@@ -1,6 +1,6 @@
 <ul class="nav nav-pills">
-  {{#each choice}}
-  <li class="active" data-choice="{{val}}"><a href="#">{{label}}</a></li>
+  {{#each choices}}
+  <li {{#if selected}}class="active"{{/if}} data-choice="{{val}}"><a href="#">{{label}}</a></li>
   {{/each}}
 </ul>
 

@@ -17,13 +17,10 @@ define(function (require) {
       if (this.get('choice_val')) {
         return {
           eq: [
-            this.col,
+            this.get('col'),
             this.get('choice_val')
           ]
         };
-      } else {
-        // Return an empty clause when no choice is selected.
-        return {}
       }
     }
 
@@ -36,7 +33,6 @@ define(function (require) {
 
     events: {
       'click li': 'set_choice',
-      'click': 'clicked',
     },
 
     initialize: function(options) {
@@ -46,15 +42,26 @@ define(function (require) {
     },
 
     render: function() {
+      var t = this;
+
+      var choices = _.map(this.choice_model.get('choices'), function(choice) {
+        // Flag the selected choice.
+        if (choice.val === t.choice_model.get('choice_val')) {
+          return _.extend({}, choice, {selected: true});
+        }
+        return choice;
+      });
+
       var render_content = this.tmpl({
-        choices: this.choice_model.get('choices')
+        choices: choices
       })
       this.$el.html(render_content);
       return this
     },
 
     set_choice: function(e) {
-      console.log(e);
+      this.choice_model.set('choice_val', e.currentTarget.dataset.choice);
+      this.render();
     },
 
     clicked: function(e) {
