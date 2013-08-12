@@ -39,6 +39,7 @@ define(function (require) {
       // Initialize with a choice model in the options hash.
       _.bindAll(this, 'render', 'set_choice')
       this.choice_model = this.options.choice_model;
+      this.label = this.options.label;
     },
 
     render: function() {
@@ -53,6 +54,8 @@ define(function (require) {
       });
 
       var render_content = this.tmpl({
+        label: this.label,
+        id: this.el.id + 'pills',
         choices: choices
       })
       this.$el.html(render_content);
