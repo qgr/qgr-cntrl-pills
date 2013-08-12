@@ -13,7 +13,7 @@ define(function (require) {
 
     initialize: function() {
       this.col = options.col;
-    }
+    },
 
     get_subtree: function() {
       return {
@@ -28,10 +28,6 @@ define(function (require) {
 
   var PillChoiceView = Backbone.View.extend({
     // Represent an individual checkbox with a view.
-
-    tagName: 'label',
-
-    class: 'checkbox',
 
     tmpl: Handlebars.compile(pills_tmpl),
 
