@@ -9,11 +9,9 @@ define(function (require) {
 
 
   var PillChoice = Backbone.Model.extend({
-    // Has attr choice_val
-
-    initialize: function() {
-      this.col = options.col;
-    },
+    // Has attrs:
+    //  - choices (array of choices)
+    //  - choice_val (selected choice)
 
     get_subtree: function() {
       if (this.get('choice_val')) {
