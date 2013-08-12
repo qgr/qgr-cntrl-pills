@@ -16,12 +16,17 @@ define(function (require) {
     },
 
     get_subtree: function() {
-      return {
-        eq: [
-          this.col,
-          c.get('choice_val');
-        ]
-      };
+      if (this.get('choice_val')) {
+        return {
+          eq: [
+            this.col,
+            this.get('choice_val')
+          ]
+        };
+      } else {
+        // Return an empty clause when no choice is selected.
+        return {}
+      }
     }
 
   });
@@ -39,12 +44,12 @@ define(function (require) {
     initialize: function(options) {
       // Initialize with a choice model in the options hash.
       _.bindAll(this, 'render', 'set_choice')
-      this.choices = this.options.choices;
+      this.choice_model = this.options.choice_model;
     },
 
     render: function() {
       var render_content = this.tmpl({
-        choice: this.choices
+        choices: this.choice_model.get('choices')
       })
       this.$el.html(render_content);
       return this
